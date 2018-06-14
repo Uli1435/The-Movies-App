@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">The Movies App</string>
+    <string name="header_image">Header Image</string>
+    <string name="poster_image">Poster Image</string>
+    <string name="rating">Rating:</string>
+    <string name="released_date">Released Date:</string>
+    <string name="description">Description:</string>
 </resources>
