@@ -44,19 +44,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new GridLayoutManager(this, 2);
         mMoviesListRecyclerView.setLayoutManager(layoutManager);
 
-
-        mAdapter = new MoviesAdapter(mMovieItems, new CustomItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Log.d("###################", "clicked position:" + position);
-
-
-                Movies myMovies = mMovieItems.get(position);
-
-//                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
-//                intent.putExtra("movies", (Parcelable) myMovies);
-            }
-        });
+        mAdapter = new MoviesAdapter(mMovieItems, getApplicationContext());
 
         mMoviesListRecyclerView.setAdapter(mAdapter);
 
@@ -67,12 +55,10 @@ public class MainActivity extends AppCompatActivity {
         new MoviesAsyncTask(this).execute(value);
     }
 
-    public static class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>>{
+    public class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>>{
 
-        private MoviesAdapter mMoviesAdapter;
-        private RecyclerView mRecyclerView;
+
         private List<Movies> parseMovieList;
-        private CustomItemClickListener mListener;
         private Context mContext;
 
         public MoviesAsyncTask(Context context){
@@ -105,10 +91,11 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<Movies> moviesList) {
             super.onPostExecute(moviesList);
 
-            mMoviesAdapter = new MoviesAdapter(moviesList, mListener);
+            mAdapter = new MoviesAdapter(moviesList, mContext);
+
             if (moviesList != null && !moviesList.isEmpty()){
-                mRecyclerView.setAdapter(mMoviesAdapter);
-                mMoviesAdapter.notifyDataSetChanged();
+                mMoviesListRecyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(mContext, "Oops... Something went wrong...",
                         Toast.LENGTH_LONG).show();

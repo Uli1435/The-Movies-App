@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -23,9 +24,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
     private CustomItemClickListener mListener;
 
-    public MoviesAdapter(List<Movies> moviesList, CustomItemClickListener listener){
+    public MoviesAdapter(List<Movies> moviesList, Context context){
         mMoviesList = moviesList;
-        mListener = listener;
+        mContext = context;
     }
 
 
@@ -43,6 +44,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movies movies = mMoviesList.get(position);
 
+
+
         String posterPath = movies.getPoster();
         Picasso.get()
                 .load(BASE_IMAGE_URL + posterPath)
@@ -59,6 +62,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView posterImageView;
+        public TextView title;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
