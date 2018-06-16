@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -21,6 +24,7 @@ public class InfoActivity extends AppCompatActivity {
     private TextView releaseDate;
     private TextView description;
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
+    private static final String BACKGROUND_IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +40,22 @@ public class InfoActivity extends AppCompatActivity {
         releaseDate = findViewById(R.id.release_date);
         description = findViewById(R.id.description_textView);
 
+        String dateFromMainActivity = getIntent().getStringExtra("releasedDate");
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = simpleDateFormat.parse(dateFromMainActivity);
+            SimpleDateFormat simpleDateFormatOutput = new SimpleDateFormat("dd-MM-yyyy");
+            dateFromMainActivity = simpleDateFormatOutput.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
 
         movieTitle.setText(getIntent().getStringExtra("title"));
         rating.setText(getIntent().getStringExtra("rating"));
-        releaseDate.setText(getIntent().getStringExtra("releasedDate"));
+        releaseDate.setText(dateFromMainActivity);
         description.setText(getIntent().getStringExtra("overview"));
 
         String posterString = getIntent().getStringExtra("poster");
@@ -53,7 +68,7 @@ public class InfoActivity extends AppCompatActivity {
                 .into(poster);
 
         Picasso.get()
-                .load(BASE_IMAGE_URL + backgroundPosterString)
+                .load(BACKGROUND_IMAGE_URL + backgroundPosterString)
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.no_image_available_placeholder)
                 .into(landscapePosterImageView);
