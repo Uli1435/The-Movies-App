@@ -1,6 +1,5 @@
 package com.example.ulrich.themoviesapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -58,31 +57,5 @@ public class InfoActivity extends AppCompatActivity {
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.no_image_available_placeholder)
                 .into(landscapePosterImageView);
-
-
-
-
-//        Intent intent = getIntent();
-//        Movies movies = intent.getParcelableExtra("movies");
-//        String titleString = movies.getTitle();
-//        String descriptionString = movies.getOverview();
-//        String ratingsString = movies.getRatings();
-//        String releasedDateString = movies.getReleasedDate();
-//        String landscapePosterString = movies.getLandscapePoster();
-//
-//
-//        movieTitle.setText(titleString);
-//        description.setText(descriptionString);
-//        rating.setText(ratingsString);
-//        releaseDate.setText(releasedDateString);
-//
-//        Picasso.get()
-//                .load(BASE_IMAGE_URL + landscapePosterString)
-//                .placeholder(R.drawable.placeholder)
-//                .error(R.drawable.no_image_available_placeholder)
-//                .into(landscapePosterImageView);
-
-
-
     }
 }

@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private final String AVERAGE_ORDER = "top_rated";
     private final String DEFAULT_VALUE = POPULAR_ORDER;
 
-    private CustomItemClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

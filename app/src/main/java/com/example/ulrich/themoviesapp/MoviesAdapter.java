@@ -23,7 +23,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     private List<Movies> mMoviesList ;
     private Context mContext;
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
-//    private CustomItemClickListener mListener;
 
     public MoviesAdapter(List<Movies> moviesList, Context context){
         mMoviesList = moviesList;
