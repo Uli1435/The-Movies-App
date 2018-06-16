@@ -18,7 +18,7 @@ public class NetworkUtils {
 
     private final static String API_KEY = "api_key";
 
-    private final static String API_KEY_VALUE = "XXXXXXXXXXXXXXXX";
+    private final static String API_KEY_VALUE = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
 
     public static URL buildBaseUrl(String sortBy){

@@ -44,24 +44,25 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new GridLayoutManager(this, 2);
         mMoviesListRecyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new MoviesAdapter(mMovieItems, getApplicationContext());
+
+        mAdapter = new MoviesAdapter(mMovieItems, this);
 
         mMoviesListRecyclerView.setAdapter(mAdapter);
 
         loadMovieData(DEFAULT_VALUE);
     }
 
-    private void loadMovieData(String value){
+    private void loadMovieData(String value) {
         new MoviesAsyncTask(this).execute(value);
     }
 
-    public class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>>{
+    public class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>> {
 
 
         private List<Movies> parseMovieList;
         private Context mContext;
 
-        public MoviesAsyncTask(Context context){
+        public MoviesAsyncTask(Context context) {
             mContext = context;
         }
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 String jsonMoviesRespond = NetworkUtils.getResponseFromHttpUrl(moviesUrl);
                 parseMovieList = MoviesJsonUtils.getMoviesPosterStringFromJson(jsonMoviesRespond);
                 return parseMovieList;
-            } catch (IOException | JSONException e){
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
             mAdapter = new MoviesAdapter(moviesList, mContext);
 
-            if (moviesList != null && !moviesList.isEmpty()){
+            if (moviesList != null && !moviesList.isEmpty()) {
                 mMoviesListRecyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
             } else {

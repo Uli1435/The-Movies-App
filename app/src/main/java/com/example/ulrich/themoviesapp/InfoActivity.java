@@ -8,11 +8,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 /**
  * Created on 14.06.18 / 13:49.
  */
-class InfoActivity extends AppCompatActivity {
+public class InfoActivity extends AppCompatActivity {
 
+    private ImageView poster;
     private ImageView landscapePosterImageView;
     private TextView movieTitle;
     private TextView rating;
@@ -25,8 +28,9 @@ class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        poster = findViewById(R.id.poster_image_view);
         landscapePosterImageView = findViewById(R.id.landscape_poster_image_view);
         movieTitle = findViewById(R.id.movie_title_textView);
         rating = findViewById(R.id.rating_textView);
@@ -34,25 +38,49 @@ class InfoActivity extends AppCompatActivity {
         description = findViewById(R.id.description_textView);
 
 
-        Intent intent = getIntent();
-        Movies movies = intent.getParcelableExtra("movies");
-        String titleString = movies.getTitle();
-        String descriptionString = movies.getOverview();
-        String ratingsString = movies.getRatings();
-        String releasedDateString = movies.getReleasedDate();
-        String landscapePosterString = movies.getLandscapePoster();
 
+        movieTitle.setText(getIntent().getStringExtra("title"));
+        rating.setText(getIntent().getStringExtra("rating"));
+        releaseDate.setText(getIntent().getStringExtra("releasedDate"));
+        description.setText(getIntent().getStringExtra("overview"));
 
-        movieTitle.setText(titleString);
-        description.setText(descriptionString);
-        rating.setText(ratingsString);
-        releaseDate.setText(releasedDateString);
+        String posterString = getIntent().getStringExtra("poster");
+        String backgroundPosterString = getIntent().getStringExtra("backgroundPoster");
 
         Picasso.get()
-                .load(BASE_IMAGE_URL + landscapePosterString)
+                .load(BASE_IMAGE_URL + posterString)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.no_image_available_placeholder)
+                .into(poster);
+
+        Picasso.get()
+                .load(BASE_IMAGE_URL + backgroundPosterString)
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.no_image_available_placeholder)
                 .into(landscapePosterImageView);
+
+
+
+
+//        Intent intent = getIntent();
+//        Movies movies = intent.getParcelableExtra("movies");
+//        String titleString = movies.getTitle();
+//        String descriptionString = movies.getOverview();
+//        String ratingsString = movies.getRatings();
+//        String releasedDateString = movies.getReleasedDate();
+//        String landscapePosterString = movies.getLandscapePoster();
+//
+//
+//        movieTitle.setText(titleString);
+//        description.setText(descriptionString);
+//        rating.setText(ratingsString);
+//        releaseDate.setText(releasedDateString);
+//
+//        Picasso.get()
+//                .load(BASE_IMAGE_URL + landscapePosterString)
+//                .placeholder(R.drawable.placeholder)
+//                .error(R.drawable.no_image_available_placeholder)
+//                .into(landscapePosterImageView);
 
 
 
