@@ -31,7 +31,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/landscape_poster_image_view"
             app:layout_constraintDimensionRatio="w,2:3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/landscape_poster_image_view" />
+            app:layout_constraintTop_toBottomOf="@+id/landscape_poster_image_view"
+            android:transitionName="activity_transition"/>
 
         <TextView
             android:id="@+id/movie_title_textView"

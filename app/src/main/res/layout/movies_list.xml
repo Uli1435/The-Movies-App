@@ -19,7 +19,8 @@
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:src="@drawable/poster_path"/>
+            android:src="@drawable/poster_path"
+            android:transitionName="activity_transition"/>
 
 
     </android.support.v7.widget.CardView>

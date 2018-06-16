@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.ulrich.themoviesapp"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -30,3 +30,4 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0-alpha3'
     implementation 'com.squareup.picasso:picasso:2.71828'
 }
+//TODO the minSdkVersion was 19. I changed it for the transition to work

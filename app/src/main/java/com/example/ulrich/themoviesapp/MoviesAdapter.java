@@ -1,8 +1,11 @@
 package com.example.ulrich.themoviesapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created on 14.06.18 / 12:53.
@@ -84,13 +88,19 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             Movies movies = myMovies.get(position);
 
             Intent intent = new Intent(context, InfoActivity.class);
+
+            //For the activity transition
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
+                    ((Activity) context, posterImageView, Objects.requireNonNull(ViewCompat
+                            .getTransitionName(posterImageView)));
+
             intent.putExtra("poster", movies.getPoster());
             intent.putExtra("backgroundPoster", movies.getLandscapePoster());
             intent.putExtra("title", movies.getTitle());
             intent.putExtra("releasedDate", movies.getReleasedDate());
             intent.putExtra("overview", movies.getOverview());
             intent.putExtra("rating", movies.getRatings());
-            context.startActivity(intent);
+            context.startActivity(intent, options.toBundle());
         }
     }
 }
