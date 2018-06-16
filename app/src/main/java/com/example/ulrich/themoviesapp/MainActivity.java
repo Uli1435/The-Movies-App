@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -58,21 +59,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mMoviesListRecyclerView.setAdapter(mAdapter);
-        new MoviesAsyncTask().execute();
+
+        loadMovieData(DEFAULT_VALUE);
+    }
+
+    private void loadMovieData(String value){
+        new MoviesAsyncTask(this).execute(value);
     }
 
     public static class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>>{
 
-        private WeakReference<MainActivity> mainActivity;
-        private WeakReference<MoviesAdapter> adapterWeakReference;
-        private WeakReference<RecyclerView> recyclerViewWeakReference;
+        private MoviesAdapter mMoviesAdapter;
+        private RecyclerView mRecyclerView;
         private List<Movies> parseMovieList;
-        private WeakReference<CustomItemClickListener> mListener;
+        private CustomItemClickListener mListener;
         private Context mContext;
 
-        public MoviesAsyncTask(Context context, WeakReference<CustomItemClickListener> listener){
+        public MoviesAsyncTask(Context context){
             mContext = context;
-            mListener = listener;
         }
 
 
@@ -101,6 +105,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<Movies> moviesList) {
             super.onPostExecute(moviesList);
 
+            mMoviesAdapter = new MoviesAdapter(moviesList, mListener);
+            if (moviesList != null && !moviesList.isEmpty()){
+                mRecyclerView.setAdapter(mMoviesAdapter);
+                mMoviesAdapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(mContext, "Oops... Something went wrong...",
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
