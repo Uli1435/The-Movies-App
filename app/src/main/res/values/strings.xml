@@ -6,4 +6,14 @@
     <string name="released_date">Released Date:</string>
     <string name="description">Description:</string>
     <string name="info_activity">info Activity</string>
+    <string name="sort_by">SORT BY</string>
+    <string name="show">Short by:</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <string-array name="choices">
+        <item>Most Popular</item>
+        <item>Top Rated</item>
+        <item>Upcoming</item>
+    </string-array>
 </resources>

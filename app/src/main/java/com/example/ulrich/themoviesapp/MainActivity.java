@@ -1,14 +1,18 @@
 package com.example.ulrich.themoviesapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Parcelable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private GridLayoutManager layoutManager;
     private final String POPULAR_ORDER = "popular";
     private final String AVERAGE_ORDER = "top_rated";
+    private final String UPCOMING_ORDER = "upcoming";
     private final String DEFAULT_VALUE = POPULAR_ORDER;
 
 
@@ -101,5 +106,59 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int menuItemThatWasSelected = item.getItemId();
+        if (menuItemThatWasSelected == R.id.sort_by_menu_item){
+            AlertDialogWithRadioButtonGroup();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void AlertDialogWithRadioButtonGroup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.show)
+                .setSingleChoiceItems(R.array.choices, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //When switching options
+                    }
+                })
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //When pressing the ok button
+
+                        int radioButton = ((AlertDialog) dialogInterface).getListView().getCheckedItemPosition();
+                        switch (radioButton){
+                            case 0:
+                                loadMovieData(POPULAR_ORDER);
+                                break;
+                            case 1:
+                                loadMovieData(AVERAGE_ORDER);
+                                break;
+                            case 2:
+                                loadMovieData(UPCOMING_ORDER);
+                                break;
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //When pressing the cancel button
+                        dialogInterface.cancel();
+                    }
+                })
+                .show();
     }
 }

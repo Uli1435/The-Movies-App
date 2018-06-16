@@ -18,13 +18,16 @@ public class NetworkUtils {
 
     private final static String API_KEY = "api_key";
 
-    private final static String API_KEY_VALUE = "XXXXXXXXXXXXXXXXXXXXXXX";
+    private final static String API_KEY_VALUE = "XXXXXXXXXXXXXXXXXXXXXXXXXX";
+
+    private final static String API_LANGUAGE = "language=en-US";
 
 
     public static URL buildBaseUrl(String sortBy){
         Uri buildUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon()
                 .appendPath(sortBy)
                 .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                .appendQueryParameter("Language", API_LANGUAGE)
                 .build();
 
         URL url = null;
