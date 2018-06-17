@@ -1,34 +1,22 @@
 package com.example.ulrich.themoviesapp;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Fade;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MoviesAdapter mAdapter;
-    private RecyclerView mMoviesListRecyclerView;
+    MoviesAdapter mAdapter;
+    RecyclerView mMoviesListRecyclerView;
     private List<Movies> mMovieItems;
     private GridLayoutManager layoutManager;
     private final String POPULAR_ORDER = "popular";
@@ -43,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //When transitioning from one activity to another
-        //so that the statusbar don't flash
+        //so that the status bar don't flash
         Fade fade = new Fade();
         View decor = getWindow().getDecorView();
         fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
@@ -71,64 +59,7 @@ public class MainActivity extends AppCompatActivity {
         new MoviesAsyncTask(this).execute(value);
     }
 
-    public static class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>> {
 
-        private WeakReference<MainActivity> mainActivityWeakReference;
-
-        private List<Movies> parseMovieList;
-        private Context mContext;
-
-        public MoviesAsyncTask(MainActivity activity) {
-            mainActivityWeakReference = new WeakReference<>(activity);
-        }
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            MainActivity activity = mainActivityWeakReference.get();
-            if (activity ==null || activity.isFinishing()){
-                return;
-            }
-        }
-
-        @Override
-        protected List<Movies> doInBackground(String... strings) {
-
-            URL moviesUrl = NetworkUtils.buildBaseUrl(strings[0]);
-
-            try {
-                String jsonMoviesRespond = NetworkUtils.getResponseFromHttpUrl(moviesUrl);
-                parseMovieList = MoviesJsonUtils.getMoviesPosterStringFromJson(jsonMoviesRespond);
-                return parseMovieList;
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(List<Movies> moviesList) {
-            super.onPostExecute(moviesList);
-
-            MainActivity activity = mainActivityWeakReference.get();
-            if (activity ==null || activity.isFinishing()){
-                return;
-            }
-
-            activity.mAdapter = new MoviesAdapter(moviesList, activity);
-
-            if (moviesList != null && !moviesList.isEmpty()) {
-                activity.mMoviesListRecyclerView.setAdapter(activity.mAdapter);
-                activity.mAdapter.notifyDataSetChanged();
-            } else {
-                Toast.makeText(mContext, "Oops... Something went wrong...",
-                        Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
