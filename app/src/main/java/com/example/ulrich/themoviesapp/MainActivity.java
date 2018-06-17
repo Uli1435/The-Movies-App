@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            activity.mAdapter = new MoviesAdapter(moviesList, mContext);
+            activity.mAdapter = new MoviesAdapter(moviesList, activity);
 
             if (moviesList != null && !moviesList.isEmpty()) {
                 activity.mMoviesListRecyclerView.setAdapter(activity.mAdapter);
