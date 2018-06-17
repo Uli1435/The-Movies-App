@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -25,6 +26,7 @@ public class InfoActivity extends AppCompatActivity {
     private TextView rating;
     private TextView releaseDate;
     private TextView description;
+    private RatingBar ratingBar;
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
     private static final String BACKGROUND_IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
 
@@ -34,7 +36,7 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         //When transitioning from one activity to another
-        //so that the statusbar don't flash
+        //so that the status bar don't flash
         Fade fade = new Fade();
         View decor = getWindow().getDecorView();
         fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
@@ -44,8 +46,9 @@ public class InfoActivity extends AppCompatActivity {
         getWindow().setExitTransition(fade);
 
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+//        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        ratingBar = findViewById(R.id.ratingBar);
         poster = findViewById(R.id.poster_image_view);
         landscapePosterImageView = findViewById(R.id.landscape_poster_image_view);
         movieTitle = findViewById(R.id.movie_title_textView);
@@ -65,6 +68,10 @@ public class InfoActivity extends AppCompatActivity {
         }
 
 
+
+        String ratingString = getIntent().getStringExtra("rating");
+        float ratingDouble = Float.parseFloat(ratingString);
+        ratingBar.setRating(ratingDouble / 2);
 
         movieTitle.setText(getIntent().getStringExtra("title"));
         rating.setText(getIntent().getStringExtra("rating"));
