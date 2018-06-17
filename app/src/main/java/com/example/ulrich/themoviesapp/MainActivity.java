@@ -71,20 +71,26 @@ public class MainActivity extends AppCompatActivity {
         new MoviesAsyncTask(this).execute(value);
     }
 
-    public class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>> {
+    public static class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>> {
 
+        private WeakReference<MainActivity> mainActivityWeakReference;
 
         private List<Movies> parseMovieList;
         private Context mContext;
 
-        public MoviesAsyncTask(Context context) {
-            mContext = context;
+        public MoviesAsyncTask(MainActivity activity) {
+            mainActivityWeakReference = new WeakReference<>(activity);
         }
 
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            MainActivity activity = mainActivityWeakReference.get();
+            if (activity ==null || activity.isFinishing()){
+                return;
+            }
         }
 
         @Override
@@ -107,11 +113,16 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<Movies> moviesList) {
             super.onPostExecute(moviesList);
 
-            mAdapter = new MoviesAdapter(moviesList, mContext);
+            MainActivity activity = mainActivityWeakReference.get();
+            if (activity ==null || activity.isFinishing()){
+                return;
+            }
+
+            activity.mAdapter = new MoviesAdapter(moviesList, mContext);
 
             if (moviesList != null && !moviesList.isEmpty()) {
-                mMoviesListRecyclerView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
+                activity.mMoviesListRecyclerView.setAdapter(activity.mAdapter);
+                activity.mAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(mContext, "Oops... Something went wrong...",
                         Toast.LENGTH_LONG).show();
