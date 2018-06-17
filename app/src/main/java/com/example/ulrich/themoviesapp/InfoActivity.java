@@ -89,7 +89,7 @@ public class InfoActivity extends AppCompatActivity {
 
         Picasso.get()
                 .load(BACKGROUND_IMAGE_URL + backgroundPosterString)
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.background_placeholder)
                 .error(R.drawable.no_image_available_placeholder)
                 .into(landscapePosterImageView);
     }
