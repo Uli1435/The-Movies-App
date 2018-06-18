@@ -16,6 +16,7 @@ import java.util.List;
 public class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>>{
 
 
+
     private WeakReference<MainActivity> mainActivityWeakReference;
 
     private List<Movies> parseMoviesList;
