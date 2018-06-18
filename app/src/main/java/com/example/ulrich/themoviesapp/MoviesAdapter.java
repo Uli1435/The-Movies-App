@@ -84,22 +84,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         @Override
         public void onClick(View view) {
 
-            int position = getAdapterPosition();
-            Movies movies = myMovies.get(position);
-
-            Intent intent = new Intent(context, InfoActivity.class);
-
             //For the activity transition
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
                     ((Activity) context, posterImageView, Objects.requireNonNull(ViewCompat
                             .getTransitionName(posterImageView)));
 
-            intent.putExtra("poster", movies.getPoster());
-            intent.putExtra("backgroundPoster", movies.getLandscapePoster());
-            intent.putExtra("title", movies.getTitle());
-            intent.putExtra("releasedDate", movies.getReleasedDate());
-            intent.putExtra("overview", movies.getOverview());
-            intent.putExtra("rating", movies.getRatings());
+            int position = getAdapterPosition();
+            Movies movies = myMovies.get(position);
+
+            Intent intent = new Intent(context, InfoActivity.class);
+            intent.putExtra("Movie Infos", movies);
             context.startActivity(intent, options.toBundle());
         }
     }

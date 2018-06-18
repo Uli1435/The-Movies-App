@@ -18,7 +18,7 @@ public class NetworkUtils {
 
     private final static String API_KEY = "api_key";
 
-    private final static String API_KEY_VALUE = "XXXXXXXX";
+    private final static String API_KEY_VALUE = "XXXXXXXXXXXXXXXXXXXX";
 
     private final static String API_LANGUAGE = "language=en-US";
 

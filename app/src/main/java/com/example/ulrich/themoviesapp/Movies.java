@@ -1,9 +1,12 @@
 package com.example.ulrich.themoviesapp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created on 14.06.18 / 11:49.
  */
-public class Movies {
+public class Movies implements Parcelable {
 
     private String title;
     private String poster;
@@ -69,4 +72,40 @@ public class Movies {
     public void setLandscapePoster(String landscapePoster) {
         this.landscapePoster = landscapePoster;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.poster);
+        dest.writeString(this.overview);
+        dest.writeString(this.ratings);
+        dest.writeString(this.releasedDate);
+        dest.writeString(this.landscapePoster);
+    }
+
+    protected Movies(Parcel in) {
+        this.title = in.readString();
+        this.poster = in.readString();
+        this.overview = in.readString();
+        this.ratings = in.readString();
+        this.releasedDate = in.readString();
+        this.landscapePoster = in.readString();
+    }
+
+    public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
+        @Override
+        public Movies createFromParcel(Parcel source) {
+            return new Movies(source);
+        }
+
+        @Override
+        public Movies[] newArray(int size) {
+            return new Movies[size];
+        }
+    };
 }

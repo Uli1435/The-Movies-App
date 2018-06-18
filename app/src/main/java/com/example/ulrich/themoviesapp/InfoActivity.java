@@ -1,8 +1,13 @@
 package com.example.ulrich.themoviesapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -13,7 +18,6 @@ import com.squareup.picasso.Picasso;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * Created on 14.06.18 / 13:49.
@@ -35,6 +39,41 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+
+        final FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Snackbar.make(view, "Added to your Favorites", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.like_complete_white_24dp));
+            }
+        });
+
+        ratingBar = findViewById(R.id.ratingBar);
+        ratingBar.setFocusable(false);
+        //Use the listener only for the rating bar to not be touchable
+        ratingBar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+        poster = findViewById(R.id.poster_image_view);
+        landscapePosterImageView = findViewById(R.id.landscape_poster_image_view);
+        movieTitle = findViewById(R.id.movie_title_textView);
+        rating = findViewById(R.id.rating_textView);
+        releaseDate = findViewById(R.id.release_date);
+        description = findViewById(R.id.description_textView);
+
+
+        setUpDetails();
+
+    }
+
+
+
+    public void setUpDetails(){
         //When transitioning from one activity to another
         //so that the status bar don't flash
         Fade fade = new Fade();
@@ -46,40 +85,30 @@ public class InfoActivity extends AppCompatActivity {
         getWindow().setExitTransition(fade);
 
 
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Intent intent = getIntent();
+        Movies movies = intent.getParcelableExtra("Movie Infos");
+        movieTitle.setText(movies.getTitle());
+        String posterString = movies.getPoster();
+        description.setText(movies.getOverview());
+        String ratingsString = movies.getRatings();
+        float ratingsFloat = Float.parseFloat(ratingsString);
+        ratingBar.setRating(ratingsFloat / 2);
+        rating.setText(movies.getRatings());
+        String dateString = movies.getReleasedDate();
+        String backgroundPosterString = movies.getLandscapePoster();
 
-        ratingBar = findViewById(R.id.ratingBar);
-        poster = findViewById(R.id.poster_image_view);
-        landscapePosterImageView = findViewById(R.id.landscape_poster_image_view);
-        movieTitle = findViewById(R.id.movie_title_textView);
-        rating = findViewById(R.id.rating_textView);
-        releaseDate = findViewById(R.id.release_date);
-        description = findViewById(R.id.description_textView);
-
-        String dateFromMainActivity = getIntent().getStringExtra("releasedDate");
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date date = simpleDateFormat.parse(dateFromMainActivity);
+            Date date = simpleDateFormat.parse(dateString);
             SimpleDateFormat simpleDateFormatOutput = new SimpleDateFormat("dd-MM-yyyy");
-            dateFromMainActivity = simpleDateFormatOutput.format(date);
+            dateString = simpleDateFormatOutput.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        releaseDate.setText(dateString);
 
 
-
-        String ratingString = getIntent().getStringExtra("rating");
-        float ratingDouble = Float.parseFloat(ratingString);
-        ratingBar.setRating(ratingDouble / 2);
-
-        movieTitle.setText(getIntent().getStringExtra("title"));
-        rating.setText(getIntent().getStringExtra("rating"));
-        releaseDate.setText(dateFromMainActivity);
-        description.setText(getIntent().getStringExtra("overview"));
-
-        String posterString = getIntent().getStringExtra("poster");
-        String backgroundPosterString = getIntent().getStringExtra("backgroundPoster");
 
         Picasso.get()
                 .load(BASE_IMAGE_URL + posterString)
@@ -93,4 +122,6 @@ public class InfoActivity extends AppCompatActivity {
                 .error(R.drawable.no_image_available_placeholder)
                 .into(landscapePosterImageView);
     }
+
+
 }

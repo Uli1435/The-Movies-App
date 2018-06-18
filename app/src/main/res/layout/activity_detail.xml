@@ -5,11 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#80BDBDBD"
-    android:clipToPadding="false">
+    android:fillViewport="true">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constrain_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/like_border_white_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/landscape_poster_image_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/landscape_poster_image_view" />
+
 
 
         <ImageView
@@ -73,6 +88,10 @@
             tools:text="6.8" />
 
         <RatingBar
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:focusable="false"
+            android:isIndicator="false"
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,15 +150,14 @@
             android:id="@+id/description_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginStart="26dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="80dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
             tools:text="Here goes the description for the movie!!!" />
-
-
 
 
     </android.support.constraint.ConstraintLayout>

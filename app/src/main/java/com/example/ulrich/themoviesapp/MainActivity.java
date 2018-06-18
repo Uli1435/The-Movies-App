@@ -78,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void AlertDialogWithRadioButtonGroup() {
+
+        final int popularMovies = 0;
+        final int averageMovies = 1;
+        final int upcomingMovies = 2;
+
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(R.string.show)
                 .setSingleChoiceItems(R.array.choices, -1, new DialogInterface.OnClickListener() {
@@ -93,13 +98,13 @@ public class MainActivity extends AppCompatActivity {
 
                         int radioButton = ((AlertDialog) dialogInterface).getListView().getCheckedItemPosition();
                         switch (radioButton){
-                            case 0:
+                            case popularMovies:
                                 loadMovieData(POPULAR_ORDER);
                                 break;
-                            case 1:
+                            case averageMovies:
                                 loadMovieData(AVERAGE_ORDER);
                                 break;
-                            case 2:
+                            case upcomingMovies:
                                 loadMovieData(UPCOMING_ORDER);
                                 break;
                         }
