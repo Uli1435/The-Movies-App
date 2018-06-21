@@ -14,15 +14,18 @@ public class Movies implements Parcelable {
     private String ratings;
     private String releasedDate;
     private String landscapePoster;
+    private String moviesId;
+
 
     public Movies(String title, String poster, String overview, String ratings, String releasedDate,
-                  String landscapePoster) {
+                  String landscapePoster, String moviesId) {
         this.title = title;
         this.poster = poster;
         this.overview = overview;
         this.ratings = ratings;
         this.releasedDate = releasedDate;
         this.landscapePoster = landscapePoster;
+        this.moviesId = moviesId;
     }
 
     public String getTitle() {
@@ -73,6 +76,14 @@ public class Movies implements Parcelable {
         this.landscapePoster = landscapePoster;
     }
 
+    public String getMoviesId() {
+        return moviesId;
+    }
+
+    public void setMoviesId(String moviesId) {
+        this.moviesId = moviesId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -86,6 +97,7 @@ public class Movies implements Parcelable {
         dest.writeString(this.ratings);
         dest.writeString(this.releasedDate);
         dest.writeString(this.landscapePoster);
+        dest.writeString(this.moviesId);
     }
 
     protected Movies(Parcel in) {
@@ -95,9 +107,10 @@ public class Movies implements Parcelable {
         this.ratings = in.readString();
         this.releasedDate = in.readString();
         this.landscapePoster = in.readString();
+        this.moviesId = in.readString();
     }
 
-    public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
+    public static final Creator<Movies> CREATOR = new Creator<Movies>() {
         @Override
         public Movies createFromParcel(Parcel source) {
             return new Movies(source);

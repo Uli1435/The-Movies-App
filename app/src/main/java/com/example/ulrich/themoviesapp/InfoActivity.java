@@ -15,9 +15,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created on 14.06.18 / 13:49.
@@ -31,8 +36,10 @@ public class InfoActivity extends AppCompatActivity {
     private TextView releaseDate;
     private TextView description;
     private RatingBar ratingBar;
+    private TextView reviews;
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
     private static final String BACKGROUND_IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
+    private boolean isPressed = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +51,18 @@ public class InfoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Snackbar.make(view, "Added to your Favorites", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.like_complete_white_24dp));
+                    if (isPressed) {
+                        fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.like_complete_white_24dp));
+                        isPressed = false;
+                        Snackbar.make(view, "Added to your Favorites", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        //TODO When pressed add to the DB
+                    } else {
+                        fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.like_border_white_24dp));
+                        isPressed = true;
+                        Snackbar.make(view, "Removed from your Favorites", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
             }
         });
 
@@ -65,6 +81,7 @@ public class InfoActivity extends AppCompatActivity {
         rating = findViewById(R.id.rating_textView);
         releaseDate = findViewById(R.id.release_date);
         description = findViewById(R.id.description_textView);
+        reviews = findViewById(R.id.reviews_text_view);
 
 
         setUpDetails();
@@ -96,6 +113,19 @@ public class InfoActivity extends AppCompatActivity {
         rating.setText(movies.getRatings());
         String dateString = movies.getReleasedDate();
         String backgroundPosterString = movies.getLandscapePoster();
+
+//        String reviewsId = movies.getMoviesId();
+//
+//        List<Movies> parseReviewList;
+//
+//        URL reviewsURL = NetworkUtils.buildReviewsUrl(reviewsId);
+//        try {
+//            String jsonMoviesReviewResponse = NetworkUtils.getResponseFromHttpUrl(reviewsURL);
+//            parseReviewList = MoviesJsonUtils.getMoviesPosterStringFromJson(jsonMoviesReviewResponse);
+//            return parseReviewList;
+//        } catch (IOException | JSONException e){
+//            return null;
+//        }
 
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

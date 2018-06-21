@@ -24,6 +24,7 @@ public class MoviesJsonUtils {
         final String POSTER_LANDSCAPE = "backdrop_path";
         final String PLOT_OVERVIEW = "overview";
         final String RELEASE_DATE = "release_date";
+        final String MOVIE_ID = "id";
 
 
         JSONObject root = new JSONObject(json);
@@ -41,8 +42,10 @@ public class MoviesJsonUtils {
             double averageVoting = resultRoot.optDouble(USER_VOTE_AVERAGE);
             String averageVotingString = String.valueOf(averageVoting);
 
+            String id = resultRoot.getString(MOVIE_ID);
+
             Movies moviesObject = new Movies(title, posterString, description,
-                    averageVotingString, releaseDate, landscapePosterString);
+                    averageVotingString, releaseDate, landscapePosterString, id);
             movies.add(moviesObject);
         }
         return movies;

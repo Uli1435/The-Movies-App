@@ -22,6 +22,8 @@ public class NetworkUtils {
 
     private final static String API_LANGUAGE = "language=en-US";
 
+    private final static String REVIEWS = "reviews";
+
 
     public static URL buildBaseUrl(String sortBy){
         Uri buildUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon()
@@ -38,6 +40,23 @@ public class NetworkUtils {
         }
         return url;
     }
+
+//    public static URL buildReviewsUrl(String moviesId){
+//        Uri buildUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon()
+//                .appendQueryParameter("movies_id", moviesId)
+//                .appendPath(REVIEWS)
+//                .appendQueryParameter(API_KEY, API_KEY_VALUE)
+//                .appendQueryParameter("Language", API_LANGUAGE)
+//                .build();
+//
+//        URL url = null;
+//        try {
+//            url = new URL(buildUri.toString());
+//        } catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }
+//        return url;
+//    }
 
 
     public static String getResponseFromHttpUrl(URL url) throws IOException{

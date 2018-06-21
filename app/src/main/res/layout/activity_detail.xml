@@ -153,11 +153,34 @@
             android:layout_marginStart="26dp"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="5dp"
-            android:paddingBottom="80dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
             tools:text="Here goes the description for the movie!!!" />
+
+        <TextView
+            android:id="@+id/reviews_header_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="15dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_textView"
+            android:text="@string/reviews" />
+
+        <TextView
+            android:id="@+id/reviews_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:textStyle="bold"
+            tools:text="The review goes here."
+            app:layout_constraintTop_toBottomOf="@id/reviews_header_text"/>
 
 
     </android.support.constraint.ConstraintLayout>
