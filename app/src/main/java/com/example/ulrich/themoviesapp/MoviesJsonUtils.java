@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class MoviesJsonUtils {
 
-    public static List<Movies> getMoviesPosterStringFromJson(String json)
+    public static List<Movies> getMoviesInfoStringFromJson(String json)
         throws JSONException{
 
         List<Movies> movies = new ArrayList<>();
@@ -49,5 +49,30 @@ public class MoviesJsonUtils {
             movies.add(moviesObject);
         }
         return movies;
+    }
+
+    public static List<Reviews> getReviewsInfoStringFromJson(String reviewJson)
+            throws JSONException{
+
+        List<Reviews> reviews = new ArrayList<>();
+
+        final String LIST_RESULTS = "results";
+        final String AUTHOR = "author";
+        final String CONTENT = "content";
+        final String REVIEW_URL = "url";
+
+        JSONObject root = new JSONObject(reviewJson);
+        JSONArray resultsArray = root.optJSONArray(LIST_RESULTS);
+        for (int i = 0; i < resultsArray.length(); i++){
+            JSONObject resultRoot = resultsArray.optJSONObject(i);
+
+            String authorNameString = resultRoot.optString(AUTHOR);
+            String contentString = resultRoot.optString(CONTENT);
+            String urlString = resultRoot.optString(REVIEW_URL);
+
+            Reviews reviewObject = new Reviews(authorNameString, contentString, urlString);
+            reviews.add(reviewObject);
+        }
+        return reviews;
     }
 }

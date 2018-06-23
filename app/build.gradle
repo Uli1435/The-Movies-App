@@ -32,3 +32,4 @@ dependencies {
     implementation 'com.android.support:design:28.0.0-alpha3'
 }
 //TODO the minSdkVersion was 19. I changed it for the transition to work
+

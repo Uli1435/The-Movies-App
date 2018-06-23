@@ -42,7 +42,7 @@ public class MoviesAsyncTask extends AsyncTask<String, Void, List<Movies>>{
 
         try {
             String jsonMoviesRespond = NetworkUtils.getResponseFromHttpUrl(moviesUrl);
-            parseMoviesList = MoviesJsonUtils.getMoviesPosterStringFromJson(jsonMoviesRespond);
+            parseMoviesList = MoviesJsonUtils.getMoviesInfoStringFromJson(jsonMoviesRespond);
             return parseMoviesList;
         } catch (IOException | JSONException e){
             e.printStackTrace();

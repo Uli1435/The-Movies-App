@@ -10,7 +10,8 @@
     <string name="show">Short by:</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="reviews">Reviews:</string>
+    <string name="reviews">Show Reviews</string>
+    <string name="written_by">Written by:</string>
 
     <string-array name="choices">
         <item>Most Popular</item>

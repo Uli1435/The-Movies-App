@@ -18,7 +18,7 @@ public class NetworkUtils {
 
     private final static String API_KEY = "api_key";
 
-    private final static String API_KEY_VALUE = "XXXXXXXXXXXXXXXXXXXX";
+    private final static String API_KEY_VALUE = "XXXXXXXXXXXXXXXX";
 
     private final static String API_LANGUAGE = "language=en-US";
 
@@ -41,25 +41,45 @@ public class NetworkUtils {
         return url;
     }
 
-//    public static URL buildReviewsUrl(String moviesId){
-//        Uri buildUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon()
-//                .appendQueryParameter("movies_id", moviesId)
-//                .appendPath(REVIEWS)
-//                .appendQueryParameter(API_KEY, API_KEY_VALUE)
-//                .appendQueryParameter("Language", API_LANGUAGE)
-//                .build();
-//
-//        URL url = null;
-//        try {
-//            url = new URL(buildUri.toString());
-//        } catch (MalformedURLException e){
-//            e.printStackTrace();
-//        }
-//        return url;
-//    }
 
 
     public static String getResponseFromHttpUrl(URL url) throws IOException{
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        try {
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput){
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static URL buildReviewsUrl(String moviesId){
+        Uri buildUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon()
+                .appendPath(moviesId)
+                .appendPath(REVIEWS)
+                .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                .appendQueryParameter("", API_LANGUAGE)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(buildUri.toString());
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static  String getResponseFromHttpUrlForReviews(URL url) throws IOException{
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();
