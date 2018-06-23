@@ -1,6 +1,7 @@
 package com.example.ulrich.themoviesapp;
 
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -58,7 +59,9 @@ public class ReviewsMoviesAsyncTask extends AsyncTask<String, Void, List<Reviews
             activity.mReviewsRecyclerView.setAdapter(activity.mReviewsAdapter);
             activity.mReviewsAdapter.notifyDataSetChanged();
         } else {
-            Toast.makeText(activity, "No reviews to show!!!", Toast.LENGTH_LONG).show();
+            activity.noReviewsTextView.setVisibility(View.VISIBLE);
+            activity.mReviewsRecyclerView.setVisibility(View.INVISIBLE);
+            activity.reviews.setText(R.string.there_are_no_reviews_for_this_movie_yet);
         }
 
     }

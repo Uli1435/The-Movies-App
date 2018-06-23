@@ -10,8 +10,9 @@
     <string name="show">Short by:</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="reviews">Show Reviews</string>
+    <string name="reviews">Reviews:</string>
     <string name="written_by">Written by:</string>
+    <string name="there_are_no_reviews_for_this_movie_yet">There are no reviews for this movie yet!</string>
 
     <string-array name="choices">
         <item>Most Popular</item>
