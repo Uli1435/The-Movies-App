@@ -2,7 +2,6 @@ package com.example.ulrich.themoviesapp;
 
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -16,17 +15,17 @@ import java.util.List;
  */
 public class ReviewsMoviesAsyncTask extends AsyncTask<String, Void, List<Reviews>> {
     private List<Reviews> parseMovieReviews;
-    private WeakReference<InfoActivity> infoActivityWeakReference;
+    private WeakReference<ReviewsActivity> reviewsActivityWeakReference;
 
-    public ReviewsMoviesAsyncTask(InfoActivity activity){
-        infoActivityWeakReference = new WeakReference<>(activity);
+    public ReviewsMoviesAsyncTask(ReviewsActivity activity){
+        reviewsActivityWeakReference = new WeakReference<>(activity);
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
-        InfoActivity activity = infoActivityWeakReference.get();
+        ReviewsActivity activity = reviewsActivityWeakReference.get();
         if (activity == null || activity.isFinishing()){
             return;
         }
@@ -49,19 +48,19 @@ public class ReviewsMoviesAsyncTask extends AsyncTask<String, Void, List<Reviews
     protected void onPostExecute(List<Reviews> reviewList) {
         super.onPostExecute(reviewList);
 
-        InfoActivity activity = infoActivityWeakReference.get();
+        ReviewsActivity activity = reviewsActivityWeakReference.get();
         if (activity == null || activity.isFinishing()){
             return;
         }
 
-        activity.mReviewsAdapter = new ReviewsAdapter(reviewList, activity);
+        activity.reviewsAdapter = new ReviewsAdapter(reviewList, activity);
         if (reviewList != null && !reviewList.isEmpty()){
-            activity.mReviewsRecyclerView.setAdapter(activity.mReviewsAdapter);
-            activity.mReviewsAdapter.notifyDataSetChanged();
+            activity.reviewsRecyclerView.setAdapter(activity.reviewsAdapter);
+            activity.reviewsAdapter.notifyDataSetChanged();
         } else {
-            activity.noReviewsTextView.setVisibility(View.VISIBLE);
-            activity.mReviewsRecyclerView.setVisibility(View.INVISIBLE);
-            activity.reviews.setText(R.string.there_are_no_reviews_for_this_movie_yet);
+//            activity.noReviewsTextView.setVisibility(View.VISIBLE);
+//            activity.mReviewsRecyclerView.setVisibility(View.INVISIBLE);
+//            activity.reviews.setText(R.string.there_are_no_reviews_for_this_movie_yet);
         }
 
     }

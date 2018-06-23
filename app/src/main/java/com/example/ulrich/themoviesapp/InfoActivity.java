@@ -89,23 +89,6 @@ public class InfoActivity extends AppCompatActivity {
         mReviewsRecyclerView = findViewById(R.id.reviews_recycler_view);
         reviews = findViewById(R.id.reviews_header_text);
 
-        reviews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-
-        setUpDetails();
-
-    }
-
-
-
-    public void setUpDetails(){
-        //When transitioning from one activity to another
-        //so that the status bar don't flash
         Fade fade = new Fade();
         View decor = getWindow().getDecorView();
         fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
@@ -126,16 +109,16 @@ public class InfoActivity extends AppCompatActivity {
         rating.setText(movies.getRatings());
         String dateString = movies.getReleasedDate();
         String backgroundPosterString = movies.getLandscapePoster();
-        String moviesIdString = movies.getMoviesId();
+        final String moviesIdString = movies.getMoviesId();
 
-        mReviewsMoviesList = new ArrayList<>();
-
-        mReviewsRecyclerView.setHasFixedSize(true);
-        mReviewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mReviewsAdapter = new ReviewsAdapter(mReviewsMoviesList, this);
-
-        mReviewsRecyclerView.setAdapter(mReviewsAdapter);
-        new ReviewsMoviesAsyncTask(this).execute(moviesIdString);
+//        mReviewsMoviesList = new ArrayList<>();
+//
+//        mReviewsRecyclerView.setHasFixedSize(true);
+//        mReviewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        mReviewsAdapter = new ReviewsAdapter(mReviewsMoviesList, this);
+//
+//        mReviewsRecyclerView.setAdapter(mReviewsAdapter);
+//        new ReviewsMoviesAsyncTask(this).execute(moviesIdString);
 
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -161,6 +144,81 @@ public class InfoActivity extends AppCompatActivity {
                 .placeholder(R.drawable.background_placeholder)
                 .error(R.drawable.no_image_available_placeholder)
                 .into(landscapePosterImageView);
+
+        reviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InfoActivity.this, ReviewsActivity.class);
+                intent.putExtra("Movies Id String", moviesIdString);
+                startActivity(intent);
+            }
+        });
+
+
+//        setUpDetails();
+
     }
+
+
+
+//    public void setUpDetails(){
+//        //When transitioning from one activity to another
+//        //so that the status bar don't flash
+//        Fade fade = new Fade();
+//        View decor = getWindow().getDecorView();
+//        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+//        fade.excludeTarget(android.R.id.statusBarBackground, true);
+//        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+//        getWindow().setEnterTransition(fade);
+//        getWindow().setExitTransition(fade);
+//
+//
+//        Intent intent = getIntent();
+//        Movies movies = intent.getParcelableExtra("Movie Infos");
+//        movieTitle.setText(movies.getTitle());
+//        String posterString = movies.getPoster();
+//        description.setText(movies.getOverview());
+//        String ratingsString = movies.getRatings();
+//        float ratingsFloat = Float.parseFloat(ratingsString);
+//        ratingBar.setRating(ratingsFloat / 2);
+//        rating.setText(movies.getRatings());
+//        String dateString = movies.getReleasedDate();
+//        String backgroundPosterString = movies.getLandscapePoster();
+//        String moviesIdString = movies.getMoviesId();
+//
+////        mReviewsMoviesList = new ArrayList<>();
+////
+////        mReviewsRecyclerView.setHasFixedSize(true);
+////        mReviewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+////        mReviewsAdapter = new ReviewsAdapter(mReviewsMoviesList, this);
+////
+////        mReviewsRecyclerView.setAdapter(mReviewsAdapter);
+////        new ReviewsMoviesAsyncTask(this).execute(moviesIdString);
+//
+//
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date date = simpleDateFormat.parse(dateString);
+//            SimpleDateFormat simpleDateFormatOutput = new SimpleDateFormat("dd-MM-yyyy");
+//            dateString = simpleDateFormatOutput.format(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        releaseDate.setText(dateString);
+//
+//
+//
+//        Picasso.get()
+//                .load(BASE_IMAGE_URL + posterString)
+//                .placeholder(R.drawable.placeholder)
+//                .error(R.drawable.no_image_available_placeholder)
+//                .into(poster);
+//
+//        Picasso.get()
+//                .load(BACKGROUND_IMAGE_URL + backgroundPosterString)
+//                .placeholder(R.drawable.background_placeholder)
+//                .error(R.drawable.no_image_available_placeholder)
+//                .into(landscapePosterImageView);
+//    }
 
 }
