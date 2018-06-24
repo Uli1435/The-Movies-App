@@ -1,6 +1,7 @@
 package com.example.ulrich.themoviesapp;
 
 import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,12 +82,18 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItemThatWasSelected){
                 case popularMovies:
                     loadMovieData(POPULAR_ORDER);
+                    Toast.makeText(this, getResources().getString(R.string.most_popular), Toast.LENGTH_LONG).show();
+//                    Snackbar.make( findViewById(android.R.id.content),"Most Popular", Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
                     break;
                 case topRated:
                     loadMovieData(AVERAGE_ORDER);
+                    Toast.makeText(this, getResources().getString(R.string.top_rated)
+                            , Toast.LENGTH_LONG).show();
                     break;
                 case upcomingMovies:
                     loadMovieData(UPCOMING_ORDER);
+                    Toast.makeText(this, getResources().getString(R.string.upcoming_movies), Toast.LENGTH_LONG).show();
                     break;
             }
 

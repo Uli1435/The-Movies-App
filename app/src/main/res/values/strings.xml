@@ -19,6 +19,9 @@
     <string name="activity_trailers">Trailers</string>
     <string name="movie_info">Movie Info</string>
     <string name="chooser_title">Open with:</string>
+    <string name="top_rated">Top Rated Movies</string>
+    <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="most_popular">Most Popular Movies</string>
 
     <string-array name="choices">
         <item>Most Popular</item>
