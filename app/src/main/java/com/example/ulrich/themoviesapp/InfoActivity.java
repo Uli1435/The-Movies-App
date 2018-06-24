@@ -6,22 +6,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.transition.Fade;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created on 14.06.18 / 13:49.
@@ -37,13 +31,9 @@ public class InfoActivity extends AppCompatActivity {
     private RatingBar ratingBar;
     TextView reviews;
     TextView trailers;
-//    TextView noReviewsTextView;
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
     private static final String BACKGROUND_IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
     private boolean isPressed = true;
-//    RecyclerView mReviewsRecyclerView;
-//    ReviewsAdapter mReviewsAdapter;
-//    private List<Reviews> mReviewsMoviesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +75,7 @@ public class InfoActivity extends AppCompatActivity {
         rating = findViewById(R.id.rating_textView);
         releaseDate = findViewById(R.id.release_date);
         description = findViewById(R.id.description_textView);
-//        noReviewsTextView = findViewById(R.id.no_reviews_text_view);
 
-//        mReviewsRecyclerView = findViewById(R.id.reviews_recycler_view);
         reviews = findViewById(R.id.reviews_header_text);
         trailers = findViewById(R.id.youtube_trailer_text_view);
 

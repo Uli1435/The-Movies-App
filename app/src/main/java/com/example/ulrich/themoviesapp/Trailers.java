@@ -5,27 +5,27 @@ package com.example.ulrich.themoviesapp;
  */
 public class Trailers {
 
-    private String mYoutubeThumbnail;
+    private String mKeyForYoutubeThumbnail;
     private String mYoutubeTitle;
 
-    public Trailers(String mYoutubeThumbnail, String mYoutubeTitle) {
-        this.mYoutubeThumbnail = mYoutubeThumbnail;
+    public Trailers(String mKeyForYoutubeThumbnail, String mYoutubeTitle) {
+        this.mKeyForYoutubeThumbnail = mKeyForYoutubeThumbnail;
         this.mYoutubeTitle = mYoutubeTitle;
     }
 
-    public String getmYoutubeThumbnail() {
-        return mYoutubeThumbnail;
+    public String getKeyForYoutubeThumbnail() {
+        return mKeyForYoutubeThumbnail;
     }
 
-    public void setmYoutubeThumbnail(String mYoutubeThumbnail) {
-        this.mYoutubeThumbnail = mYoutubeThumbnail;
+    public void setKeyForYoutubeThumbnail(String mKeyForYoutubeThumbnail) {
+        this.mKeyForYoutubeThumbnail = mKeyForYoutubeThumbnail;
     }
 
-    public String getmYoutubeTitle() {
+    public String getYoutubeTitle() {
         return mYoutubeTitle;
     }
 
-    public void setmYoutubeTitle(String mYoutubeTitle) {
+    public void setYoutubeTitle(String mYoutubeTitle) {
         this.mYoutubeTitle = mYoutubeTitle;
     }
 }

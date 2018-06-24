@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 /**
@@ -43,14 +41,14 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Trailers trailers = mTrailersList.get(position);
 
-        String thumbnailPath = trailers.getmYoutubeThumbnail();
+        String thumbnailPath = trailers.getKeyForYoutubeThumbnail();
         Picasso.get()
                 .load(YOUTUBE_IMAGE_URL + thumbnailPath + YOUTUBE_IMAGE_SUFFIX)
                 .placeholder(R.drawable.background_placeholder)
                 .error(R.drawable.no_image_available_placeholder)
                 .into(viewHolder.youtubeThumbnailImageView);
 
-        viewHolder.youtubeTitleTextView.setText(trailers.getmYoutubeTitle());
+        viewHolder.youtubeTitleTextView.setText(trailers.getYoutubeTitle());
 
     }
 
@@ -83,9 +81,8 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.ViewHold
             int position = getAdapterPosition();
             Trailers trailers = theTrailers.get(position);
 
-            //TODO When the trailer is clicked, send it to youtube
             String youtubePath = "https://www.youtube.com/watch?v=";
-            String trailersKey = trailers.getmYoutubeThumbnail();
+            String trailersKey = trailers.getKeyForYoutubeThumbnail();
 
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(youtubePath + trailersKey));
