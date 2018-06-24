@@ -10,7 +10,8 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constrain_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -24,7 +25,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/landscape_poster_image_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/landscape_poster_image_view" />
-
 
 
         <ImageView
@@ -88,16 +88,16 @@
             tools:text="6.8" />
 
         <RatingBar
-            android:clickable="false"
-            android:focusableInTouchMode="false"
-            android:focusable="false"
-            android:isIndicator="false"
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:isIndicator="false"
             android:rating="2.4"
             android:scaleX="0.8"
             android:scaleY="0.8"
@@ -150,10 +150,11 @@
             android:id="@+id/description_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="1dp"
             android:textStyle="bold"
+            android:textIsSelectable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
             tools:text="Here goes the description for the movie!!!" />
@@ -162,46 +163,20 @@
             android:id="@+id/reviews_header_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="15dp"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/reviews"
             android:textColor="#000000"
             android:textStyle="bold"
-            android:background="#FFFFFF"
-            android:gravity="center_horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description_textView"
-            android:text="@string/reviews" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/reviews_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reviews_header_text">
-
-        </android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/no_reviews_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:text="@string/there_are_no_reviews_for_this_movie_yet"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reviews_header_text" />
+            app:layout_constraintTop_toBottomOf="@id/description_textView" />
 
 
     </android.support.constraint.ConstraintLayout>

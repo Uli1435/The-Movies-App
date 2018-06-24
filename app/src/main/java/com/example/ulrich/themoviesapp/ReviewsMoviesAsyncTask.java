@@ -2,6 +2,7 @@ package com.example.ulrich.themoviesapp;
 
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONException;
 
@@ -58,9 +59,8 @@ public class ReviewsMoviesAsyncTask extends AsyncTask<String, Void, List<Reviews
             activity.reviewsRecyclerView.setAdapter(activity.reviewsAdapter);
             activity.reviewsAdapter.notifyDataSetChanged();
         } else {
-//            activity.noReviewsTextView.setVisibility(View.VISIBLE);
-//            activity.mReviewsRecyclerView.setVisibility(View.INVISIBLE);
-//            activity.reviews.setText(R.string.there_are_no_reviews_for_this_movie_yet);
+            activity.noReviewsTextView.setVisibility(View.VISIBLE);
+            activity.reviewsRecyclerView.setVisibility(View.INVISIBLE);
         }
 
     }

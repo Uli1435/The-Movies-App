@@ -36,13 +36,13 @@ public class InfoActivity extends AppCompatActivity {
     private TextView description;
     private RatingBar ratingBar;
     TextView reviews;
-    TextView noReviewsTextView;
+//    TextView noReviewsTextView;
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
     private static final String BACKGROUND_IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
     private boolean isPressed = true;
-    RecyclerView mReviewsRecyclerView;
-    ReviewsAdapter mReviewsAdapter;
-    private List<Reviews> mReviewsMoviesList;
+//    RecyclerView mReviewsRecyclerView;
+//    ReviewsAdapter mReviewsAdapter;
+//    private List<Reviews> mReviewsMoviesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +84,9 @@ public class InfoActivity extends AppCompatActivity {
         rating = findViewById(R.id.rating_textView);
         releaseDate = findViewById(R.id.release_date);
         description = findViewById(R.id.description_textView);
-        noReviewsTextView = findViewById(R.id.no_reviews_text_view);
+//        noReviewsTextView = findViewById(R.id.no_reviews_text_view);
 
-        mReviewsRecyclerView = findViewById(R.id.reviews_recycler_view);
+//        mReviewsRecyclerView = findViewById(R.id.reviews_recycler_view);
         reviews = findViewById(R.id.reviews_header_text);
 
         Fade fade = new Fade();
@@ -110,15 +110,6 @@ public class InfoActivity extends AppCompatActivity {
         String dateString = movies.getReleasedDate();
         String backgroundPosterString = movies.getLandscapePoster();
         final String moviesIdString = movies.getMoviesId();
-
-//        mReviewsMoviesList = new ArrayList<>();
-//
-//        mReviewsRecyclerView.setHasFixedSize(true);
-//        mReviewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        mReviewsAdapter = new ReviewsAdapter(mReviewsMoviesList, this);
-//
-//        mReviewsRecyclerView.setAdapter(mReviewsAdapter);
-//        new ReviewsMoviesAsyncTask(this).execute(moviesIdString);
 
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
