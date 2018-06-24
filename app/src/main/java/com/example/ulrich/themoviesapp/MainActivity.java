@@ -5,9 +5,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Fade;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import java.util.ArrayList;
@@ -63,60 +65,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.sub_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        final int popularMovies = R.id.popular_movies;
+        final int topRated = R.id.top_rated;
+        final int upcomingMovies = R.id.upcoming;
+
         int menuItemThatWasSelected = item.getItemId();
-        if (menuItemThatWasSelected == R.id.sort_by_menu_item){
-            AlertDialogWithRadioButtonGroup();
-        }
+            switch (menuItemThatWasSelected){
+                case popularMovies:
+                    loadMovieData(POPULAR_ORDER);
+                    break;
+                case topRated:
+                    loadMovieData(AVERAGE_ORDER);
+                    break;
+                case upcomingMovies:
+                    loadMovieData(UPCOMING_ORDER);
+                    break;
+            }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void AlertDialogWithRadioButtonGroup() {
-
-        final int popularMovies = 0;
-        final int averageMovies = 1;
-        final int upcomingMovies = 2;
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle(R.string.show)
-                .setSingleChoiceItems(R.array.choices, -1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //When switching options
-                    }
-                })
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //When pressing the ok button
-
-                        int radioButton = ((AlertDialog) dialogInterface).getListView().getCheckedItemPosition();
-                        switch (radioButton){
-                            case popularMovies:
-                                loadMovieData(POPULAR_ORDER);
-                                break;
-                            case averageMovies:
-                                loadMovieData(AVERAGE_ORDER);
-                                break;
-                            case upcomingMovies:
-                                loadMovieData(UPCOMING_ORDER);
-                                break;
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //When pressing the cancel button
-                        dialogInterface.cancel();
-                    }
-                })
-                .show();
     }
 }
