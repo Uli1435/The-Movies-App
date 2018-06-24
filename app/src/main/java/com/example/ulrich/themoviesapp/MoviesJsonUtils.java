@@ -75,4 +75,26 @@ public class MoviesJsonUtils {
         }
         return reviews;
     }
+
+    public static List<Trailers> getTrailersInfoStringFromJson(String trailerJson)
+        throws JSONException{
+        List<Trailers> trailers = new ArrayList<>();
+
+        final String LIST_RESULTS = "results";
+        final String KEY = "key";
+        final String YOUTUBE_TITLE = "name";
+
+        JSONObject root = new JSONObject(trailerJson);
+        JSONArray resultsArray = root.optJSONArray(LIST_RESULTS);
+        for (int i = 0; i < resultsArray.length(); i++){
+            JSONObject resultsRoot = resultsArray.optJSONObject(i);
+
+            String youtubeKeyString = resultsRoot.optString(KEY);
+            String youtubeTitleString = resultsRoot.optString(YOUTUBE_TITLE);
+
+            Trailers trailersObject = new Trailers(youtubeKeyString, youtubeTitleString);
+            trailers.add(trailersObject);
+        }
+        return trailers;
+    }
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,22 +8,21 @@
 
 
     <TextView
-        android:id="@+id/negative_text_view"
+        android:id="@+id/youtube_negative_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
         android:textStyle="bold"
-        android:text="@string/no_reviews_available"
+        android:text="@string/no_trailers_available"
         android:visibility="invisible" />
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_reviews_recycler_view"
+        android:id="@+id/youtube_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ReviewsActivity">
-
+        tools:context=".YoutubeActivity">
 
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

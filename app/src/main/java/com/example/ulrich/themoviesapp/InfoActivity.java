@@ -36,6 +36,7 @@ public class InfoActivity extends AppCompatActivity {
     private TextView description;
     private RatingBar ratingBar;
     TextView reviews;
+    TextView trailers;
 //    TextView noReviewsTextView;
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
     private static final String BACKGROUND_IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
@@ -88,6 +89,7 @@ public class InfoActivity extends AppCompatActivity {
 
 //        mReviewsRecyclerView = findViewById(R.id.reviews_recycler_view);
         reviews = findViewById(R.id.reviews_header_text);
+        trailers = findViewById(R.id.youtube_trailer_text_view);
 
         Fade fade = new Fade();
         View decor = getWindow().getDecorView();
@@ -142,6 +144,15 @@ public class InfoActivity extends AppCompatActivity {
                 Intent intent = new Intent(InfoActivity.this, ReviewsActivity.class);
                 intent.putExtra("Movies Id String", moviesIdString);
                 startActivity(intent);
+            }
+        });
+
+        trailers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(InfoActivity.this, YoutubeActivity.class);
+                intent2.putExtra("Movies Id String", moviesIdString);
+                startActivity(intent2);
             }
         });
 

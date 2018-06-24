@@ -24,6 +24,7 @@ public class NetworkUtils {
 
     private final static String REVIEWS = "reviews";
 
+    private final static String VIDEOS = "videos";
 
     public static URL buildBaseUrl(String sortBy){
         Uri buildUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon()
@@ -80,6 +81,42 @@ public class NetworkUtils {
     }
 
     public static  String getResponseFromHttpUrlForReviews(URL url) throws IOException{
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        try {
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput){
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
+    public static URL buildTrailersUrl(String moviesId){
+        Uri buildUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon()
+                .appendPath(moviesId)
+                .appendPath(VIDEOS)
+                .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                .appendQueryParameter("", API_LANGUAGE)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(buildUri.toString());
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static  String getResponseFromHttpUrlForTrailers(URL url) throws IOException{
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();

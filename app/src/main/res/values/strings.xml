@@ -12,7 +12,9 @@
     <string name="cancel">Cancel</string>
     <string name="reviews">Reviews ></string>
     <string name="written_by">Written by:</string>
-    <string name="no_reviews_for_this_movie_yet">No reviews available for this movie yet!</string>
+    <string name="no_reviews_available">No reviews available!!!</string>
+    <string name="trailers"><![CDATA[Trailers >]]></string>
+    <string name="no_trailers_available">No trailers available!!!</string>
 
     <string-array name="choices">
         <item>Most Popular</item>
