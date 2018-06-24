@@ -13,8 +13,11 @@
     <string name="reviews">Reviews ></string>
     <string name="written_by">Written by:</string>
     <string name="no_reviews_available">No reviews available!!!</string>
-    <string name="trailers"><![CDATA[Trailers >]]></string>
+    <string name="trailers">Trailers ></string>
     <string name="no_trailers_available">No trailers available!!!</string>
+    <string name="activity_reviews">Reviews</string>
+    <string name="activity_trailers">Trailers</string>
+    <string name="movie_info">Movie Info</string>
 
     <string-array name="choices">
         <item>Most Popular</item>

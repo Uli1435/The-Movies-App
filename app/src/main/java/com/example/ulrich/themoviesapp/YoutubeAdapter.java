@@ -84,12 +84,14 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.ViewHold
             Trailers trailers = theTrailers.get(position);
 
             //TODO When the trailer is clicked, send it to youtube
+            String youtubePath = "https://www.youtube.com/watch?v=";
+            String trailersKey = trailers.getmYoutubeThumbnail();
 
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-//            intent.setData(Uri.parse(trailers.));
-//            if (intent.resolveActivity(context.getPackageManager()) != null) {
-//                context.startActivity(intent);
-//            }
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(youtubePath + trailersKey));
+            if (intent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(intent);
+            }
 
         }
     }
