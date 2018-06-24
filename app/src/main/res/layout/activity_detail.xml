@@ -147,6 +147,10 @@
 
 
         <TextView
+
+            android:enabled="true"
+            android:focusable="true"
+            android:longClickable="true"
             android:id="@+id/description_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

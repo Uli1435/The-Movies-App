@@ -19,7 +19,6 @@ public class ReviewsActivity extends AppCompatActivity {
     RecyclerView reviewsRecyclerView;
     ReviewsAdapter reviewsAdapter;
     TextView noReviewsTextView;
-    CardView reviewsCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
