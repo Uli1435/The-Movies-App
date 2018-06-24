@@ -2,10 +2,7 @@ package com.example.ulrich.themoviesapp;
 
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.TextView;
-
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URL;
