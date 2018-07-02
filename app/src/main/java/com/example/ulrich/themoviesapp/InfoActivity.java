@@ -1,6 +1,7 @@
 package com.example.ulrich.themoviesapp;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -46,13 +47,15 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     if (isPressed) {
-                        fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.like_complete_white_24dp));
+//                        fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.like_complete_white_24dp));
+                        fab.setImageResource(R.drawable.like_complete_white_24dp);
                         isPressed = false;
                         Snackbar.make(view, "Added to your Favorites", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                         //TODO When pressed add to the DB
                     } else {
-                        fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.like_border_white_24dp));
+//                        fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.like_border_white_24dp));
+                        fab.setImageResource(R.drawable.like_border_white_24dp);
                         isPressed = true;
                         Snackbar.make(view, "Removed from your Favorites", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -79,13 +82,15 @@ public class InfoActivity extends AppCompatActivity {
         reviews = findViewById(R.id.reviews_header_text);
         trailers = findViewById(R.id.youtube_trailer_text_view);
 
-        Fade fade = new Fade();
-        View decor = getWindow().getDecorView();
-        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
-        fade.excludeTarget(android.R.id.statusBarBackground, true);
-        fade.excludeTarget(android.R.id.navigationBarBackground, true);
-        getWindow().setEnterTransition(fade);
-        getWindow().setExitTransition(fade);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Fade fade = new Fade();
+            View decor = getWindow().getDecorView();
+            fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            getWindow().setEnterTransition(fade);
+            getWindow().setExitTransition(fade);
+        }
 
 
         Intent intent = getIntent();

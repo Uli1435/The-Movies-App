@@ -3,6 +3,7 @@ package com.example.ulrich.themoviesapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -84,17 +85,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         @Override
         public void onClick(View view) {
 
-            //For the activity transition
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
-                    ((Activity) context, posterImageView, Objects.requireNonNull(ViewCompat
-                            .getTransitionName(posterImageView)));
-
             int position = getAdapterPosition();
             Movies movies = myMovies.get(position);
 
             Intent intent = new Intent(context, InfoActivity.class);
             intent.putExtra("Movie Infos", movies);
-            context.startActivity(intent, options.toBundle());
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                //For the activity transition
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
+                        ((Activity) context, posterImageView, Objects.requireNonNull(ViewCompat
+                                .getTransitionName(posterImageView)));
+
+                context.startActivity(intent, options.toBundle());
+            }
+            context.startActivity(intent);
         }
     }
 }
